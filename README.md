@@ -44,7 +44,7 @@ This application requires Java Development Kit (JDK) version 8 or higher to be i
 
 
 ### Closest Pair of Points
-- **Description:** Find the pair of points with the smallest Euclidean distance between them.
+- **Description:** Finds the pair of points with the smallest Euclidean distance between them.
 - **Example:**
   - **Input:** Points: (0,0), (1,1), (3,4), (5,2)  ![CPInput](https://github.com/user-attachments/assets/2cb0e2aa-8804-4c4b-b3fc-ef9d430d47c0)
 
@@ -79,25 +79,30 @@ This application requires Java Development Kit (JDK) version 8 or higher to be i
       7 999 999  0
       ```
     - Source node: 0
-  - **Output:** Shortest distances from node 0: To node 1: 8, To node 2: 5, To node 3: 9
+  - **Output:** Shortest distances from node 0: To node 1: 10, To node 2: 5, To node 3: 9
+      ![dj](https://github.com/user-attachments/assets/e45c6f99-bacf-4550-9cd2-115f20d80c9d)
 
 ### Huffman Codes
 - **Description:** Generates Huffman codes based on character frequencies to minimize the average encoding length.
 - **Example:**
+      ![HuffI](https://github.com/user-attachments/assets/ab6a0bda-20da-435b-8626-77d8bd2887e7)
   - **Input:** Frequencies: (A,3) (B,6) (C,1) (D,2)
+      ![HuffO](https://github.com/user-attachments/assets/c3e11b99-34b9-4fb5-95e9-f64a32808fce)
   - **Output:** Huffman Codes: A: 10, B: 0, C: 110, D: 111
-
+      
 ### Kruskal's MST
-- **Description:** Finds the Minimum Spanning Tree (MST) of a graph using Kruskal's algorithm.
+- **Description:** Finds a graph's Minimum Spanning Tree (MST) using Kruskal's algorithm.
 - **Example:**
   - **Input:**
     - Number of nodes: 4
     - Number of edges: 5
     - Edges: (0,1,10), (0,2,6), (0,3,5), (1,3,15), (2,3,4)
   - **Output:** Edges in MST: 2 - 3: 4, 0 - 3: 5, 0 - 1: 10
+      ![Krus](https://github.com/user-attachments/assets/dc23e32c-6ca8-4fba-82a2-a4ed482298dd)
+
 
 ### Prim's MST
-- **Description:** Finds the Minimum Spanning Tree (MST) of a graph using Prim's algorithm.
+- **Description:** Finds a graph's Minimum Spanning Tree (MST) using Prim's algorithm.
 - **Example:**
   - **Input:**
     - Number of nodes: 4
@@ -108,7 +113,8 @@ This application requires Java Development Kit (JDK) version 8 or higher to be i
       8  10  0  20
       0  15  20  0
       ```
-  - **Output:** Total weight of MST: 30
+  - **Output:** Total weight of MST: 28
+      ![prim](https://github.com/user-attachments/assets/4293ab17-0a61-4bac-ab16-868d46e7988f)
 
 ### Traveling Salesman Problem (TSP)
 - **Description:** Finds the minimum cost Hamiltonian cycle in a complete weighted graph.
@@ -123,4 +129,5 @@ This application requires Java Development Kit (JDK) version 8 or higher to be i
       20  25  30  0
       ```
   - **Output:** Minimum cost of TSP: 80
+      ![TSP](https://github.com/user-attachments/assets/97b4559b-f25a-4f4c-98d5-fdca04154658)
 
