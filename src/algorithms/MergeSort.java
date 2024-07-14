@@ -33,4 +33,8 @@ public class MergeSort {
             arr[k++] = right[j++];
         }
     }
+
+    public static void mergeSort(int[] array, int i, int i1) {
+
+    }
 }

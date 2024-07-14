@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class ClosestPair {
+    public static double closestPair(java.awt.Point[] points) {
+        return 0;
+    }
+
     public static class Point {
         double x, y;
 
