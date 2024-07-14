@@ -58,10 +58,27 @@ public class Main {
         });
 
         strassenButton.addActionListener(e -> {
-            int[][] A = {{1, 2}, {3, 4}};
-            int[][] B = {{5, 6}, {7, 8}};
-            int[][] result = StrassenMatrixMultiplication.multiply(A, B);
-            JOptionPane.showMessageDialog(frame, "Result matrix: " + Arrays.deepToString(result));
+            String sizeInput = JOptionPane.showInputDialog("Enter the size of matrices (n x n):");
+            if (sizeInput != null) {
+                int n = Integer.parseInt(sizeInput);
+                int[][] A = new int[n][n];
+                int[][] B = new int[n][n];
+
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        A[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Enter element A[" + i + "][" + j + "]:"));
+                    }
+                }
+
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        B[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Enter element B[" + i + "][" + j + "]:"));
+                    }
+                }
+
+                int[][] result = StrassenMatrixMultiplication.multiply(A, B);
+                JOptionPane.showMessageDialog(frame, "Result matrix: " + Arrays.deepToString(result));
+            }
         });
 
         quickHullButton.addActionListener(e -> {

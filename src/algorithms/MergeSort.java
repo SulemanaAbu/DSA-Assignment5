@@ -1,40 +1,54 @@
 package algorithms;
 
 public class MergeSort {
-    public static void mergeSort(int[] arr) {
-        if (arr.length < 2) {
-            return;
+    public static void mergeSort(int[] array, int left, int right) {
+        if (left < right) {
+            int middle = (left + right) / 2;
+
+            mergeSort(array, left, middle);
+            mergeSort(array, middle + 1, right);
+
+            merge(array, left, middle, right);
         }
-        int mid = arr.length / 2;
-        int[] left = new int[mid];
-        int[] right = new int[arr.length - mid];
-
-        System.arraycopy(arr, 0, left, 0, mid);
-        System.arraycopy(arr, mid, right, 0, arr.length - mid);
-
-        mergeSort(left);
-        mergeSort(right);
-        merge(arr, left, right);
     }
 
-    private static void merge(int[] arr, int[] left, int[] right) {
-        int i = 0, j = 0, k = 0;
-        while (i < left.length && j < right.length) {
-            if (left[i] <= right[j]) {
-                arr[k++] = left[i++];
+    private static void merge(int[] array, int left, int middle, int right) {
+        int n1 = middle - left + 1;
+        int n2 = right - middle;
+
+        int[] leftArray = new int[n1];
+        int[] rightArray = new int[n2];
+
+        for (int i = 0; i < n1; ++i) {
+            leftArray[i] = array[left + i];
+        }
+        for (int j = 0; j < n2; ++j) {
+            rightArray[j] = array[middle + 1 + j];
+        }
+
+        int i = 0, j = 0;
+        int k = left;
+        while (i < n1 && j < n2) {
+            if (leftArray[i] <= rightArray[j]) {
+                array[k] = leftArray[i];
+                i++;
             } else {
-                arr[k++] = right[j++];
+                array[k] = rightArray[j];
+                j++;
             }
+            k++;
         }
-        while (i < left.length) {
-            arr[k++] = left[i++];
-        }
-        while (j < right.length) {
-            arr[k++] = right[j++];
-        }
-    }
 
-    public static void mergeSort(int[] array, int i, int i1) {
+        while (i < n1) {
+            array[k] = leftArray[i];
+            i++;
+            k++;
+        }
 
+        while (j < n2) {
+            array[k] = rightArray[j];
+            j++;
+            k++;
+        }
     }
 }
