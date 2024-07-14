@@ -1,5 +1,6 @@
 ﻿# DSA-Assignment5
 # Divide_Greedy_Assignment
+![Screenshot (45)](https://github.com/user-attachments/assets/641b39ec-ef4d-442d-a330-8884fc09464c)
 
 ## Description
 This Java GUI application showcases various algorithms implemented using object-oriented programming concepts. It includes implementations of sorting algorithms (QuickSort, MergeSort), computational geometry algorithms (Closest Pair of Points, QuickHull), matrix algorithms (Strassen's Matrix Multiplication), and graph algorithms (Dijkstra's Shortest Path, Huffman Codes, Kruskal's MST, Prim's MST, Traveling Salesman Problem).
