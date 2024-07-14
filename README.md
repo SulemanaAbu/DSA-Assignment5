@@ -46,8 +46,9 @@ This application requires Java Development Kit (JDK) version 8 or higher to be i
 ### Closest Pair of Points
 - **Description:** Find the pair of points with the smallest Euclidean distance between them.
 - **Example:**
-  - **Input:** Points: (0,0), (1,1), (3,4), (5,2)
-  - **Output:** Closest distance: 1.41 (distance between points (1,1) and (0,0))
+  - **Input:** Points: (0,0), (1,1), (3,4), (5,2)  ![CPInput](https://github.com/user-attachments/assets/2cb0e2aa-8804-4c4b-b3fc-ef9d430d47c0)
+
+  - **Output:** Closest distance: 1.41 (distance between points (1,1) and (0,0))  ![CPOutput](https://github.com/user-attachments/assets/733d09c7-c781-46e3-a404-5c093dd97220)
 
 ### Strassen's Matrix Multiplication
 - **Description:** A matrix multiplication algorithm that performs matrix multiplication in less time compared to the standard method.
