@@ -31,7 +31,10 @@ This application requires Java Development Kit (JDK) version 8 or higher to be i
 - **Description:** QuickSort is a divide-and-conquer sorting algorithm that sorts elements based on a pivot element.
 - **Example:**
   - **Input:** 10, 5, 8, 3, 1
+    ![QSInput](https://github.com/user-attachments/assets/c329e3dc-61ee-49b8-9212-7874aa0a7676)
   - **Output:** Sorted Array: [1, 3, 5, 8, 10]
+    ![QSOutput](https://github.com/user-attachments/assets/0b92cd38-2932-4503-b753-be2f08f435ba)
+
 
 ### MergeSort
 - **Description:** MergeSort is another divide-and-conquer sorting algorithm that divides the array into halves, sorts each half, and then merges them.
