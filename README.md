@@ -30,15 +30,18 @@ This application requires Java Development Kit (JDK) version 8 or higher to be i
 ### QuickSort
 - **Description:** QuickSort is a divide-and-conquer sorting algorithm that sorts elements based on a pivot element.
 - **Example:**
-  - **Input:** 10, 5, 8, 3, 1 ![QSInput](https://github.com/user-attachments/assets/c329e3dc-61ee-49b8-9212-7874aa0a7676)
+  - **Input:** 10, 5, 8, 3, 1  ![QSI](https://github.com/user-attachments/assets/77132f9f-e529-42ab-8b34-f15a3ea09e42)
+
   - **Output:** Sorted Array: [1, 3, 5, 8, 10]   ![QSOutput](https://github.com/user-attachments/assets/0b92cd38-2932-4503-b753-be2f08f435ba)
 
 
 ### MergeSort
 - **Description:** MergeSort is another divide-and-conquer sorting algorithm that divides the array into halves, sorts each half, and then merges them.
 - **Example:**
-  - **Input:** 7, 2, 4, 1, 5
-  - **Output:** Sorted Array: [1, 2, 4, 5, 7]
+  - **Input:** 7, 2, 4, 1, 5  ![MSInput](https://github.com/user-attachments/assets/54423632-4f27-4bb9-a2d4-cd43b3143376)
+
+  - **Output:** Sorted Array: [1, 2, 4, 5, 7]  ![MSOutput](https://github.com/user-attachments/assets/0b57e12a-c2ac-47d0-8e76-e896d785396e)
+
 
 ### Closest Pair of Points
 - **Description:** Find the pair of points with the smallest Euclidean distance between them.
