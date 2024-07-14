@@ -1,20 +1,22 @@
+package main;
 
 import algorithms.*;
-import algorithms.QuickSort;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Algorithms");
-        frame.setSize(600, 800);
+        frame.setSize(600, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new GridLayout(11, 1));
+        frame.setLayout(new GridLayout(12, 1));
 
         // Divide and Conquer Buttons
         JButton quickSortButton = new JButton("QuickSort");
@@ -25,10 +27,12 @@ public class Main {
 
         quickSortButton.addActionListener(e -> {
             String input = JOptionPane.showInputDialog("Enter array elements separated by commas:");
-            String[] inputArray = input.split(",");
-            int[] array = Arrays.stream(inputArray).mapToInt(Integer::parseInt).toArray();
-            QuickSort.quickSort(array, 0, array.length - 1);
-            JOptionPane.showMessageDialog(frame, "Sorted Array: " + Arrays.toString(array));
+            if (input != null) {
+                String[] inputArray = input.split(",");
+                int[] array = Arrays.stream(inputArray).mapToInt(Integer::parseInt).toArray();
+                QuickSort.quickSort(array, 0, array.length - 1);
+                JOptionPane.showMessageDialog(frame, "Sorted Array: " + Arrays.toString(array));
+            }
         });
 
         mergeSortButton.addActionListener(e -> {
@@ -39,9 +43,9 @@ public class Main {
             JOptionPane.showMessageDialog(frame, "Sorted Array: " + Arrays.toString(array));
         });
 
-        closestPairButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String input = JOptionPane.showInputDialog("Enter points as x1,y1 x2,y2 ...:");
+        closestPairButton.addActionListener(e -> {
+            String input = JOptionPane.showInputDialog("Enter points as x1,y1 x2,y2 ...:");
+            if (input != null) {
                 String[] pointsStr = input.split(" ");
                 Point[] points = new Point[pointsStr.length];
                 for (int i = 0; i < pointsStr.length; i++) {
@@ -53,30 +57,29 @@ public class Main {
             }
         });
 
-        strassenButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Provide simple 2x2 matrices for demonstration
-                int[][] A = {{1, 2}, {3, 4}};
-                int[][] B = {{5, 6}, {7, 8}};
-                int[][] result = StrassenMatrixMultiplication.multiply(A, B);
-                JOptionPane.showMessageDialog(frame, "Result matrix: " + Arrays.deepToString(result));
-            }
+        strassenButton.addActionListener(e -> {
+            int[][] A = {{1, 2}, {3, 4}};
+            int[][] B = {{5, 6}, {7, 8}};
+            int[][] result = StrassenMatrixMultiplication.multiply(A, B);
+            JOptionPane.showMessageDialog(frame, "Result matrix: " + Arrays.deepToString(result));
         });
 
         quickHullButton.addActionListener(e -> {
             String input = JOptionPane.showInputDialog("Enter points as x1,y1 x2,y2 ...:");
-            String[] pointsStr = input.split(" ");
-            QuickHull.Point[] points = new QuickHull.Point[pointsStr.length];
-            for (int i = 0; i < pointsStr.length; i++) {
-                String[] coords = pointsStr[i].split(",");
-                points[i] = new QuickHull.Point(Integer.parseInt(coords[0]), Integer.parseInt(coords[1]));
+            if (input != null) {
+                String[] pointsStr = input.split(" ");
+                QuickHull.Point[] points = new QuickHull.Point[pointsStr.length];
+                for (int i = 0; i < pointsStr.length; i++) {
+                    String[] coords = pointsStr[i].split(",");
+                    points[i] = new QuickHull.Point(Integer.parseInt(coords[0]), Integer.parseInt(coords[1]));
+                }
+                List<QuickHull.Point> hull = QuickHull.quickHull(points);
+                StringBuilder result = new StringBuilder("Convex Hull Points:\n");
+                for (QuickHull.Point point : hull) {
+                    result.append("(").append(point.x).append(", ").append(point.y).append(")\n");
+                }
+                JOptionPane.showMessageDialog(frame, result.toString());
             }
-            List<QuickHull.Point> hull = QuickHull.quickHull(points);
-            StringBuilder result = new StringBuilder("Convex Hull Points:\n");
-            for (QuickHull.Point point : hull) {
-                result.append("(").append(point.x).append(", ").append(point.y).append(")\n");
-            }
-            JOptionPane.showMessageDialog(frame, result.toString());
         });
 
         // Greedy Buttons
@@ -88,49 +91,40 @@ public class Main {
 
         dijkstraButton.addActionListener(e -> {
             String input = JOptionPane.showInputDialog("Enter the number of nodes:");
-            int nodes = Integer.parseInt(input);
-            int[][] graph = new int[nodes][nodes];
-            for (int i = 0; i < nodes; i++) {
-                for (int j = 0; j < nodes; j++) {
-                    graph[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Enter weight for edge " + i + " to " + j + " (0 if no edge):"));
+            if (input != null) {
+                int nodes = Integer.parseInt(input);
+                int[][] graph = new int[nodes][nodes];
+                for (int i = 0; i < nodes; i++) {
+                    for (int j = 0; j < nodes; j++) {
+                        graph[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Enter weight for edge " + i + " to " + j + " (0 if no edge):"));
+                    }
                 }
+                int src = Integer.parseInt(JOptionPane.showInputDialog("Enter the source node:"));
+                int[] distances = Dijkstra.dijkstra(graph, src);
+                StringBuilder result = new StringBuilder("Shortest distances from node " + src + ":\n");
+                for (int i = 0; i < distances.length; i++) {
+                    result.append("To node ").append(i).append(": ").append(distances[i]).append("\n");
+                }
+                JOptionPane.showMessageDialog(frame, result.toString());
             }
-            int src = Integer.parseInt(JOptionPane.showInputDialog("Enter the source node:"));
-            int[] distances = Dijkstra.dijkstra(graph, src);
-            StringBuilder result = new StringBuilder("Shortest distances from node " + src + ":\n");
-            for (int i = 0; i < distances.length; i++) {
-                result.append("To node ").append(i).append(": ").append(distances[i]).append("\n");
-            }
-            JOptionPane.showMessageDialog(frame, result.toString());
         });
 
         huffmanButton.addActionListener(e -> {
             String input = JOptionPane.showInputDialog("Enter characters and their frequencies (format: char1,frequency1 char2,frequency2 ...):");
-            String[] charFreqStr = input.split(" ");
-            Map<Character, Integer> charFreq = new HashMap<>();
-            for (String cf : charFreqStr) {
-                String[] cfArr = cf.split(",");
-                charFreq.put(cfArr[0].charAt(0), Integer.parseInt(cfArr[1]));
-            }
-            Map<Character, String> huffmanCodes = HuffmanCodes.generateHuffmanCodes(charFreq);
-            StringBuilder result = new StringBuilder("Huffman Codes:\n");
-            for (Map.Entry<Character, String> entry : huffmanCodes.entrySet()) {
-                result.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
-            }
-            JOptionPane.showMessageDialog(frame, result.toString());
-        });
-
-        primButton.addActionListener(e -> {
-            String input = JOptionPane.showInputDialog("Enter the number of nodes:");
-            int nodes = Integer.parseInt(input);
-            int[][] graph = new int[nodes][nodes];
-            for (int i = 0; i < nodes; i++) {
-                for (int j = 0; j < nodes; j++) {
-                    graph[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Enter weight for edge " + i + " to " + j + " (0 if no edge):"));
+            if (input != null) {
+                String[] charFreqStr = input.split(" ");
+                Map<Character, Integer> charFreq = new HashMap<>();
+                for (String cf : charFreqStr) {
+                    String[] cfArr = cf.split(",");
+                    charFreq.put(cfArr[0].charAt(0), Integer.parseInt(cfArr[1]));
                 }
+                Map<Character, String> huffmanCodes = HuffmanCodes.generateHuffmanCodes(charFreq);
+                StringBuilder result = new StringBuilder("Huffman Codes:\n");
+                for (Map.Entry<Character, String> entry : huffmanCodes.entrySet()) {
+                    result.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                }
+                JOptionPane.showMessageDialog(frame, result.toString());
             }
-            int totalWeight = Prim.primMST(graph);
-            JOptionPane.showMessageDialog(frame, "Total weight of MST: " + totalWeight);
         });
 
         kruskalButton.addActionListener(e -> {
@@ -154,6 +148,21 @@ public class Main {
                 output.append(result[i].src).append(" - ").append(result[i].dest).append(": ").append(result[i].weight).append("\n");
             }
             JOptionPane.showMessageDialog(frame, output.toString());
+        });
+
+        primButton.addActionListener(e -> {
+            String input = JOptionPane.showInputDialog("Enter the number of nodes:");
+            if (input != null) {
+                int nodes = Integer.parseInt(input);
+                int[][] graph = new int[nodes][nodes];
+                for (int i = 0; i < nodes; i++) {
+                    for (int j = 0; j < nodes; j++) {
+                        graph[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Enter weight for edge " + i + " to " + j + " (0 if no edge):"));
+                    }
+                }
+                int totalWeight = Prim.primMST(graph);
+                JOptionPane.showMessageDialog(frame, "Total weight of MST: " + totalWeight);
+            }
         });
 
         tspButton.addActionListener(e -> {

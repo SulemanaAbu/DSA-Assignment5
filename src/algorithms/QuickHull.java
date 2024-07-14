@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuickHull {
+
     public static class Point {
-        public int x;
-        public int y;
+        public int x, y;
+
         public Point(int x, int y) {
             this.x = x;
             this.y = y;
@@ -14,10 +15,9 @@ public class QuickHull {
     }
 
     public static List<Point> quickHull(Point[] points) {
+        if (points.length < 3) return null;
+
         List<Point> hull = new ArrayList<>();
-        if (points.length < 3) {
-            return hull;
-        }
 
         int minPoint = -1, maxPoint = -1;
         int minX = Integer.MAX_VALUE;
@@ -38,18 +38,17 @@ public class QuickHull {
         Point B = points[maxPoint];
         hull.add(A);
         hull.add(B);
-        points[minPoint] = points[0];
-        points[maxPoint] = points[points.length - 1];
 
         List<Point> leftSet = new ArrayList<>();
         List<Point> rightSet = new ArrayList<>();
 
-        for (int i = 1; i < points.length - 1; i++) {
-            Point p = points[i];
-            if (pointLocation(A, B, p) == -1) {
-                leftSet.add(p);
-            } else if (pointLocation(A, B, p) == 1) {
-                rightSet.add(p);
+        for (Point point : points) {
+            if (point != A && point != B) {
+                if (pointLocation(A, B, point) == -1) {
+                    leftSet.add(point);
+                } else if (pointLocation(A, B, point) == 1) {
+                    rightSet.add(point);
+                }
             }
         }
 
@@ -59,21 +58,15 @@ public class QuickHull {
         return hull;
     }
 
-    private static int distance(Point A, Point B, Point C) {
-        int ABx = B.x - A.x;
-        int ABy = B.y - A.y;
-        int num = ABx * (A.y - C.y) - ABy * (A.x - C.x);
-        if (num < 0) {
-            num = -num;
-        }
-        return num;
+    private static int pointLocation(Point A, Point B, Point P) {
+        int cp1 = (B.x - A.x) * (P.y - A.y) - (B.y - A.y) * (P.x - A.x);
+        return Integer.compare(cp1, 0);
     }
 
     private static void hullSet(Point A, Point B, List<Point> set, List<Point> hull) {
+        if (set.isEmpty()) return;
+
         int insertPosition = hull.indexOf(B);
-        if (set.isEmpty()) {
-            return;
-        }
         if (set.size() == 1) {
             Point p = set.getFirst();
             set.remove(p);
@@ -83,6 +76,7 @@ public class QuickHull {
 
         int dist = Integer.MIN_VALUE;
         int furthestPoint = -1;
+
         for (int i = 0; i < set.size(); i++) {
             Point p = set.get(i);
             int distance = distance(A, B, p);
@@ -91,21 +85,22 @@ public class QuickHull {
                 furthestPoint = i;
             }
         }
+
         Point P = set.get(furthestPoint);
         set.remove(furthestPoint);
         hull.add(insertPosition, P);
 
         List<Point> leftSetAP = new ArrayList<>();
-        for (Point m : set) {
-            if (pointLocation(A, P, m) == 1) {
-                leftSetAP.add(m);
+        for (Point M : set) {
+            if (pointLocation(A, P, M) == 1) {
+                leftSetAP.add(M);
             }
         }
 
         List<Point> leftSetPB = new ArrayList<>();
-        for (Point m : set) {
-            if (pointLocation(P, B, m) == 1) {
-                leftSetPB.add(m);
+        for (Point M : set) {
+            if (pointLocation(P, B, M) == 1) {
+                leftSetPB.add(M);
             }
         }
 
@@ -113,9 +108,11 @@ public class QuickHull {
         hullSet(P, B, leftSetPB, hull);
     }
 
-    private static int pointLocation(Point A, Point B, Point P) {
-        int cp1 = (B.x - A.x) * (P.y - A.y) - (B.y - A.y) * (P.x - A.x);
-        return Integer.compare(cp1, 0);
+    private static int distance(Point A, Point B, Point C) {
+        int ABx = B.x - A.x;
+        int ABy = B.y - A.y;
+        int num = ABx * (A.y - C.y) - ABy * (A.x - C.x);
+        if (num < 0) num = -num;
+        return num;
     }
 }
-

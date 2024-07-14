@@ -4,8 +4,21 @@ import java.util.*;
 
 public class Kruskal {
 
-    public class Edge implements Comparable<Edge> {
+    public static List<Edge> kruskalMST(Edge[] edgeList, int nodes) {
+        return List.of();
+    }
+
+    public static class Edge implements Comparable<Edge> {
         public int src, dest, weight;
+        public char[] v;
+        public char[] u;
+
+        public Edge(int u, int v, int weight) {
+        }
+
+        public Edge() {
+
+        }
 
         public int compareTo(Edge compareEdge) {
             return this.weight - compareEdge.weight;

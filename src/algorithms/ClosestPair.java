@@ -1,87 +1,67 @@
 package algorithms;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class ClosestPair {
-    public static double closestPair(java.awt.Point[] points) {
-        return 0;
+
+    public static double closestPair(Point[] points) {
+        if (points.length < 2) return Double.POSITIVE_INFINITY;
+        Point[] pointsSortedByX = points.clone();
+        Arrays.sort(pointsSortedByX, Comparator.comparingInt(point -> point.x));
+        Point[] pointsSortedByY = points.clone();
+        Arrays.sort(pointsSortedByY, Comparator.comparingInt(point -> point.y));
+        return closestPairRec(pointsSortedByX, pointsSortedByY);
     }
 
-    public static class Point {
-        double x, y;
-
-        public Point(double x, double y) {
-            this.x = x;
-            this.y = y;
-        }
-    }
-
-    public static double findClosestPair(Point[] points) {
-        Point[] sortedByX = points.clone();
-        Arrays.sort(sortedByX, Comparator.comparingDouble(p -> p.x));
-        return findClosestPairRecursive(sortedByX);
-    }
-
-    private static double findClosestPairRecursive(Point[] points) {
-        int n = points.length;
-        if (n <= 3) {
-            return bruteForce(points);
-        }
+    private static double closestPairRec(Point[] pointsSortedByX, Point[] pointsSortedByY) {
+        int n = pointsSortedByX.length;
+        if (n <= 3) return bruteForce(pointsSortedByX);
 
         int mid = n / 2;
-        Point midPoint = points[mid];
+        Point midPoint = pointsSortedByX[mid];
 
-        Point[] left = Arrays.copyOfRange(points, 0, mid);
-        Point[] right = Arrays.copyOfRange(points, mid, n);
+        Point[] pointsSortedByYLeft = Arrays.copyOfRange(pointsSortedByY, 0, mid);
+        Point[] pointsSortedByYRight = Arrays.copyOfRange(pointsSortedByY, mid, n);
 
-        double leftDist = findClosestPairRecursive(left);
-        double rightDist = findClosestPairRecursive(right);
+        double dl = closestPairRec(Arrays.copyOfRange(pointsSortedByX, 0, mid), pointsSortedByYLeft);
+        double dr = closestPairRec(Arrays.copyOfRange(pointsSortedByX, mid, n), pointsSortedByYRight);
 
-        double minDist = Math.min(leftDist, rightDist);
+        double d = Math.min(dl, dr);
 
-        Point[] strip = Arrays.stream(points)
-                .filter(p -> Math.abs(p.x - midPoint.x) < minDist)
-                .toArray(Point[]::new);
+        Point[] strip = Arrays.stream(pointsSortedByY).filter(point -> Math.abs(point.x - midPoint.x) < d).toArray(Point[]::new);
 
-        Arrays.sort(strip, Comparator.comparingDouble(p -> p.y));
-
-        return Math.min(minDist, stripClosest(strip, minDist));
+        return Math.min(d, stripClosest(strip, d));
     }
 
-    private static double stripClosest(Point[] strip, double minDist) {
-        double min = minDist;
-        int n = strip.length;
+    private static double bruteForce(Point[] points) {
+        double minDist = Double.POSITIVE_INFINITY;
+        for (int i = 0; i < points.length; i++) {
+            for (int j = i + 1; j < points.length; j++) {
+                double dist = distance(points[i], points[j]);
+                if (dist < minDist) {
+                    minDist = dist;
+                }
+            }
+        }
+        return minDist;
+    }
 
-        for (int i = 0; i < n; ++i) {
-            for (int j = i + 1; j < n && (strip[j].y - strip[i].y) < min; ++j) {
+    private static double stripClosest(Point[] strip, double d) {
+        double min = d;
+        for (int i = 0; i < strip.length; i++) {
+            for (int j = i + 1; j < strip.length && (strip[j].y - strip[i].y) < min; j++) {
                 double dist = distance(strip[i], strip[j]);
                 if (dist < min) {
                     min = dist;
                 }
             }
         }
-
         return min;
     }
 
     private static double distance(Point p1, Point p2) {
         return Math.sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
-    }
-
-    private static double bruteForce(Point[] points) {
-        double min = Double.MAX_VALUE;
-        int n = points.length;
-
-        for (int i = 0; i < n; ++i) {
-            for (int j = i + 1; j < n; ++j) {
-                double dist = distance(points[i], points[j]);
-                if (dist < min) {
-                    min = dist;
-                }
-            }
-        }
-
-        return min;
     }
 }
