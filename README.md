@@ -56,13 +56,15 @@ This application requires Java Development Kit (JDK) version 8 or higher to be i
   - **Input:** Two 2x2 matrices A and B
     - A = [[1, 2], [3, 4]]
     - B = [[5, 6], [7, 8]]
-  - **Output:** Result matrix: [[19, 22], [43, 50]]
+  - **Output:** Result matrix: [[19, 22], [43, 50]]  ![SMM](https://github.com/user-attachments/assets/c3ed2ef2-7085-42ab-b4d4-65803505be08)
 
 ### QuickHull
 - **Description:** Finds the convex hull for a set of points in a 2D plane.
 - **Example:**
-  - **Input:** Points: (1,1), (2,5), (3,3), (5,3), (6,2)
-  - **Output:** Convex Hull Points: (1,1), (5,3), (6,2)
+  - **Input:** Points: (1,1), (2,5), (3,3), (5,3), (6,2)  ![QHInput](https://github.com/user-attachments/assets/4107b4b4-3651-4e9d-a8b6-f7c62ddc59d8)
+
+  - **Output:** Convex Hull Points: (1,1), (2,5), (5,3), (6,2)  ![QHOutput](https://github.com/user-attachments/assets/b7bdfca0-c18b-40f1-aadb-b604963e3789)
+
 
 ### Dijkstra's Shortest Path
 - **Description:** Finds the shortest paths from a source node to all other nodes in a weighted graph.
